@@ -1,0 +1,20 @@
+---
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+    - name: Install epel-repo
+      yum:
+        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+    - name: Update cache
+      yum:
+        list: updates
+        update_cache: true
+
+    - name: Install common packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ items }}"
