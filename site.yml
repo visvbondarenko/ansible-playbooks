@@ -1,0 +1,7 @@
+---
+- hosts: tag_type_{{ tag }}
+  gather_facts: no
+  remote_user: ec2-user
+
+  roles:
+  - { role: common, become: yes}
